@@ -3,14 +3,13 @@ import random
 import string
 
 
-# Function to generate a random password
 def generate_password():
     password_length_str = length_entry.get()
-    # Validate that the input is not empty and consists of digits
+
     if not password_length_str.isdigit():
         result_label.config(
             text="Please enter a valid password length (a positive integer).",
-            fg="red",  # Text color for error message
+            fg="red",
         )
         return
 
@@ -20,7 +19,6 @@ def generate_password():
     include_digits = digits_var.get()
     include_special_chars = special_chars_var.get()
 
-    # Define character sets based on user preferences
     lowercase_chars = string.ascii_lowercase if include_lowercase else ""
     uppercase_chars = string.ascii_uppercase if include_uppercase else ""
     digit_chars = string.digits if include_digits else ""
@@ -31,23 +29,22 @@ def generate_password():
     if not all_chars:
         result_label.config(
             text="Please select at least one character type.",
-            fg="red",  # Text color for error message
+            fg="red",
         )
     else:
         password = "".join(random.choice(all_chars) for _ in range(password_length))
         result_label.config(
             text=f"Generated Password: {password}",
-            fg="green",  # Text color for the password result
+            fg="green",
         )
 
 
-# Create the main window
 window = tk.Tk()
 window.title("Password Generator")
 window.geometry("400x300")
-window.configure(bg="Black")  # Background color of the main window
+window.configure(bg="Black")
 
-# Create and configure widgets
+
 length_label = tk.Label(
     window, text="Password Length:", bg="Black", fg="white", font=("Arial", 12)
 )
@@ -102,7 +99,7 @@ generate_button = tk.Button(
 )
 result_label = tk.Label(window, text="", font=("Arial", 12), bg="black", wraplength=300)
 
-# Place widgets in the window
+
 length_label.pack(pady=10)
 length_entry.pack(pady=5)
 lowercase_check.pack()
@@ -112,5 +109,5 @@ special_chars_check.pack()
 generate_button.pack(pady=10)
 result_label.pack()
 
-# Start the Tkinter main loop
+
 window.mainloop()
